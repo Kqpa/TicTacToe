@@ -28,6 +28,8 @@ using std::setw;
 
 #define GREEN   "\033[32m"      /* Green */
 
+#define BLUE	"\033[34m"		/* Blue */
+
 char places[9] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 bool checkWin();
@@ -36,3 +38,4 @@ bool isGameOver();
 
 void resetTable();
 
+string isFilled(int);

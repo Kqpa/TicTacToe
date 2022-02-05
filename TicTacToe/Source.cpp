@@ -21,13 +21,13 @@ class ticTacToe {
 		
 			cout << "\n\n      Tic-Tac-Toe\n\n";
 			cout << "        |     |     " << endl;
-			cout << "     " << GREEN << places[0] << RESET << "  |" << "  " << GREEN << places[1] << RESET << "  |" << "  " << GREEN << places[2] << RESET << endl;
+			cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
 			cout << "   _____|_____|_____" << endl;
 			cout << "        |     |     " << endl;
-			cout << "     " << GREEN << places[3] << RESET << "  |" << "  " << GREEN << places[4] << RESET << "  |" << "  " << GREEN << places[5] << RESET << endl;
+			cout << "     " << isFilled(3) << places[3] << RESET << "  |" << "  " << isFilled(4) << places[4] << RESET << "  |" << "  " << isFilled(5) << places[5] << RESET << endl;
 			cout << "   _____|_____|_____" << endl;
 			cout << "        |     |     " << endl;
-			cout << "     " << GREEN << places[6] << RESET << "  |" << "  " << GREEN << places[7] << RESET << "  |" << "  " << GREEN << places[8] << RESET << endl;
+			cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
 			cout << "        |     |     " << endl;
 
 		}
@@ -44,11 +44,11 @@ int main() {
 
 	ticTacToe playerOne, playerTwo;
 
+	cout << "\n\n      Tic-Tac-Toe\n\n";
+
 	do {
 
-		cout << "\n\n      Tic-Tac-Toe\n\n";
-
-		cout << "> " << GREEN << "Player 1" << RESET << ", enter your name: ";
+		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
 		cin >> playerOne.playerName;
 
 		playerOne.playerSymbol = 'X';
@@ -78,10 +78,17 @@ int main() {
 			
 			isWon = false;
 			isOver = false;
-			
-			cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
-			cin >> option;
-			option = tolower(option);
+
+			do {
+
+				cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
+				cin >> option;
+				option = tolower(option);
+
+				if (option != 'y' && option != 'n')
+					cout << "> Please select a valid option." << endl;
+
+			} while (option != 'y' && option != 'n');
 
 		}
 
@@ -95,7 +102,7 @@ int main() {
 				diff += playerTwo.playerName.length();
 			
 			cout << "\n\n  Player Points:\n";
-			cout << "> " << GREEN << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+			cout << "> " << RED << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
 			cout << "> " << GREEN << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
 			break;
@@ -108,7 +115,7 @@ int main() {
 
 		}
 
-		cout << endl << "> " << GREEN << playerOne.playerName << RESET << ", pick a square (1-9): ";
+		cout << endl << "> " << RED << playerOne.playerName << RESET << ", pick a square (1-9): ";
 		cin >> playerChoice;
 
 		playerOne.getChart(playerChoice);
@@ -117,7 +124,7 @@ int main() {
 
 		if (isWon == true) {
 			
-			cout << endl << "> " << GREEN << playerOne.playerName << RESET << " won!" << endl;
+			cout << endl << "> " << RED << playerOne.playerName << RESET << " won!" << endl;
 			playerOne.playerPoint++;
 		
 		}
@@ -125,13 +132,20 @@ int main() {
 		isOver = isGameOver();
 
 		if (isOver == true || isWon == true) {
-			
+
 			isWon = false;
 			isOver = false;
-			
-			cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
-			cin >> option;
-			option = tolower(option);
+
+			do {
+
+				cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
+				cin >> option;
+				option = tolower(option);
+
+				if (option != 'y' && option != 'n')
+					cout << "> Please select a valid option." << endl;
+
+			} while (option != 'y' && option != 'n');
 
 		}
 
@@ -145,7 +159,7 @@ int main() {
 				diff += playerTwo.playerName.length();
 
 			cout << "\n\n  Player Points:\n";
-			cout << "> " << GREEN << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+			cout << "> " << RED << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
 			cout << "> " << GREEN << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
 			break; 
@@ -227,5 +241,16 @@ void resetTable() {
 	places[6] = '7';
 	places[7] = '8';
 	places[8] = '9';
+
+}
+
+string isFilled(int i) {
+
+	if (places[i] == 'X')
+		return RED;
+	else if (places[i] == 'O')
+		return GREEN;
+	else
+		return RESET;
 
 }
