@@ -166,7 +166,7 @@ int main() {
 
 		if (isWon == true) {
 			
-			cout << endl << "> " << GREEN << playerOne.playerName << RESET << " won!" << endl;
+			cout << endl << "> " << GREEN << playerTwo.playerName << RESET << " won!" << endl;
 			playerTwo.playerPoint++;
 
 		}
