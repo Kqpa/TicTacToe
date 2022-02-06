@@ -37,7 +37,7 @@ class ticTacToe {
 int main() {
 
 	char option = '0';
-	char playerChoice;
+	int playerChoice;
 	
 	bool isWon = false;
 	bool isOver = false;
@@ -49,12 +49,12 @@ int main() {
 	do {
 
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
-		cin >> playerOne.playerName;
+		getline(cin, playerOne.playerName);
 
 		playerOne.playerSymbol = 'X';
 
 		cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
-		cin >> playerTwo.playerName;
+		getline(cin, playerTwo.playerName);
 
 		playerTwo.playerSymbol = 'O';
 
@@ -113,12 +113,24 @@ int main() {
 			resetTable();
 			continue;
 
+		
 		}
 
-		cout << endl << "> " << RED << playerOne.playerName << RESET << ", pick a square (1-9): ";
-		cin >> playerChoice;
+		do {
 
-		playerOne.getChart(playerChoice);
+			cout << endl << "> " << RED << playerOne.playerName << RESET << ", pick a square (1-9): ";
+			cin >> playerChoice;
+
+			if (playerChoice < 1 || playerChoice > 9) {
+				
+				cout << "> Please select an option between 1-9." << endl;
+			
+			}
+			
+
+		} while (playerChoice < 1 || playerChoice > 9);
+
+		playerOne.getChart(playerChoice + '0');
 
 		isWon = checkWin();
 
@@ -161,7 +173,7 @@ int main() {
 			cout << "\n\n  Player Points:\n";
 			cout << "> " << RED << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
 			cout << "> " << GREEN << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
-
+			
 			break; 
 
 		} else if (option == 'y') {
@@ -171,10 +183,21 @@ int main() {
 		
 		}
 
-		cout << endl << "> " << GREEN << playerTwo.playerName << RESET << ", pick a square (1-9): ";
-		cin >> playerChoice;
+		do {
 
-		playerTwo.getChart(playerChoice);
+			cout << endl << "> " << GREEN << playerTwo.playerName << RESET << ", pick a square (1-9): ";
+			cin >> playerChoice;
+
+			if (playerChoice < 1 || playerChoice > 9) {
+
+				cout << "> Please select an option between 1-9." << endl;
+
+			}
+
+
+		} while (playerChoice < 1 || playerChoice > 9);
+
+		playerTwo.getChart(playerChoice + '0');
 
 		isWon = checkWin();
 
