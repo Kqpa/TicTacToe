@@ -86,7 +86,7 @@ int main() {
 				option = tolower(option);
 
 				if (option != 'y' && option != 'n')
-					cout << "> Please select a valid option." << endl;
+					cout << "> Please select a valid option.";
 
 			} while (option != 'y' && option != 'n');
 
@@ -112,7 +112,6 @@ int main() {
 
 			resetTable();
 			continue;
-
 		
 		}
 
@@ -123,10 +122,9 @@ int main() {
 
 			if (playerChoice < 1 || playerChoice > 9) {
 				
-				cout << "> Please select an option between 1-9." << endl;
+				cout << "> Please select an option between 1-9.";
 			
-			}
-			
+			}	
 
 		} while (playerChoice < 1 || playerChoice > 9);
 
@@ -155,7 +153,7 @@ int main() {
 				option = tolower(option);
 
 				if (option != 'y' && option != 'n')
-					cout << "> Please select a valid option." << endl;
+					cout << "> Please select a valid option.";
 
 			} while (option != 'y' && option != 'n');
 
@@ -190,10 +188,9 @@ int main() {
 
 			if (playerChoice < 1 || playerChoice > 9) {
 
-				cout << "> Please select an option between 1-9." << endl;
+				cout << "> Please select an option between 1-9.";
 
 			}
-
 
 		} while (playerChoice < 1 || playerChoice > 9);
 
