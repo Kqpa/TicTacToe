@@ -4,9 +4,10 @@ class ticTacToe {
 
 	public:
 
-		int playerPoint = 0;
+		int playerPoint;
 		string playerName;
 		char playerSymbol;
+		string playerColor;
 
 		void getChart(char place) {
 
@@ -17,7 +18,7 @@ class ticTacToe {
 
 			}
 
-			system("cls");
+			system("cls"); /* Clears screen, use system("clear") if you're compiling using g++ */
 		
 			cout << "\n\n      Tic-Tac-Toe\n\n";
 			cout << "        |     |     " << endl;
@@ -29,6 +30,27 @@ class ticTacToe {
 			cout << "        |     |     " << endl;
 			cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
 			cout << "        |     |     " << endl;
+
+		}
+
+		int selectChoice() {
+
+			int choice;
+			
+			do {
+
+				cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a square (1-9): ";
+				cin >> choice;
+
+				if (choice < 1 || choice > 9) {
+
+					cout << "> Please select an option between 1-9.";
+
+				}
+
+			} while (choice < 1 || choice > 9);
+
+			return choice;
 
 		}
 
@@ -52,11 +74,15 @@ int main() {
 		getline(cin, playerOne.playerName);
 
 		playerOne.playerSymbol = 'X';
+		playerOne.playerPoint = 0;
+		playerOne.playerColor = RED;
 
 		cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
 		getline(cin, playerTwo.playerName);
 
 		playerTwo.playerSymbol = 'O';
+		playerTwo.playerPoint = 0;
+		playerTwo.playerColor = GREEN;
 
 		if (playerOne.playerName == playerTwo.playerName)
 			cout << "> Player names have to be different." << endl;
@@ -102,8 +128,8 @@ int main() {
 				diff += playerTwo.playerName.length();
 			
 			cout << "\n\n  Player Points:\n";
-			cout << "> " << RED << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
-			cout << "> " << GREEN << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
+			cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+			cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
 			break;
 
@@ -115,18 +141,7 @@ int main() {
 		
 		}
 
-		do {
-
-			cout << endl << "> " << RED << playerOne.playerName << RESET << ", pick a square (1-9): ";
-			cin >> playerChoice;
-
-			if (playerChoice < 1 || playerChoice > 9) {
-				
-				cout << "> Please select an option between 1-9.";
-			
-			}	
-
-		} while (playerChoice < 1 || playerChoice > 9);
+		playerChoice = playerOne.selectChoice();
 
 		playerOne.getChart(playerChoice + '0');
 
@@ -134,7 +149,7 @@ int main() {
 
 		if (isWon == true) {
 			
-			cout << endl << "> " << RED << playerOne.playerName << RESET << " won!" << endl;
+			cout << endl << "> " << playerOne.playerColor << playerOne.playerName << RESET << " won!" << endl;
 			playerOne.playerPoint++;
 		
 		}
@@ -169,8 +184,8 @@ int main() {
 				diff += playerTwo.playerName.length();
 
 			cout << "\n\n  Player Points:\n";
-			cout << "> " << RED << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
-			cout << "> " << GREEN << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
+			cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+			cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 			
 			break; 
 
@@ -181,18 +196,7 @@ int main() {
 		
 		}
 
-		do {
-
-			cout << endl << "> " << GREEN << playerTwo.playerName << RESET << ", pick a square (1-9): ";
-			cin >> playerChoice;
-
-			if (playerChoice < 1 || playerChoice > 9) {
-
-				cout << "> Please select an option between 1-9.";
-
-			}
-
-		} while (playerChoice < 1 || playerChoice > 9);
+		playerChoice = playerTwo.selectChoice();
 
 		playerTwo.getChart(playerChoice + '0');
 
@@ -200,7 +204,7 @@ int main() {
 
 		if (isWon == true) {
 			
-			cout << endl << "> " << GREEN << playerTwo.playerName << RESET << " won!" << endl;
+			cout << endl << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << " won!" << endl;
 			playerTwo.playerPoint++;
 
 		}
