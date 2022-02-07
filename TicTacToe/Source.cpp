@@ -1,74 +1,19 @@
-#include "Source.h"
-
-class ticTacToe {
-
-	public:
-
-		int playerPoint;
-		string playerName;
-		char playerSymbol;
-		string playerColor;
-
-		void getChart(char place) {
-
-			for (int i = 0; i < 9; i++) {
-
-				if (places[i] == (int)place)
-					places[i] = this->playerSymbol;
-
-			}
-
-			system("cls"); /* Clears screen, use system("clear") if you're compiling using g++ */
-		
-			cout << "\n\n      Tic-Tac-Toe\n\n";
-			cout << "        |     |     " << endl;
-			cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
-			cout << "   _____|_____|_____" << endl;
-			cout << "        |     |     " << endl;
-			cout << "     " << isFilled(3) << places[3] << RESET << "  |" << "  " << isFilled(4) << places[4] << RESET << "  |" << "  " << isFilled(5) << places[5] << RESET << endl;
-			cout << "   _____|_____|_____" << endl;
-			cout << "        |     |     " << endl;
-			cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
-			cout << "        |     |     " << endl;
-
-		}
-
-		int selectChoice() {
-
-			int choice;
-			
-			do {
-
-				cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a square (1-9): ";
-				cin >> choice;
-
-				if (choice < 1 || choice > 9) {
-
-					cout << "> Please select an option between 1-9.";
-
-				}
-
-			} while (choice < 1 || choice > 9);
-
-			return choice;
-
-		}
-
-};
+#include "Core.h"
+#include "Func.h"
 
 int main() {
 
-	char option = '0';
-	int playerChoice;
+	Player playerOne, playerTwo;
 	
-	bool isWon = false;
-	bool isOver = false;
-
-	ticTacToe playerOne, playerTwo;
+	char option = '0', loopCondition;
+	bool isWon = false, isOver = false;
+	int playerChoice;
 
 	cout << "\n\n      Tic-Tac-Toe\n\n";
 
 	do {
+
+		/* Initilize `Player` object data & make sure player names are different */
 
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
 		getline(cin, playerOne.playerName);
@@ -94,56 +39,24 @@ int main() {
 		if ((option == '0') || (option == 'y')) {
 
 			playerOne.getChart(NULL);
-			option = '-1'; // Sets to random number so doesnt it doesn't meet the condition
+			option = '1'; /* Sets the value of `option` to something other than 'y' and '0' so it doesnt meet the condition again */
 
 		}
+
+		/* 1st Player's Turn */
 
 		isOver = isGameOver();
 
-		if (isOver == true || isWon == true) {
-			
-			isWon = false;
-			isOver = false;
+		loopCondition = checkContinue(isWon, isOver, option, playerOne, playerTwo);
 
-			do {
-
-				cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
-				cin >> option;
-				option = tolower(option);
-
-				if (option != 'y' && option != 'n')
-					cout << "> Please select a valid option.";
-
-			} while (option != 'y' && option != 'n');
-
-		}
-
-		if (option == 'n') {
-
-			int diff = 5;
-
-			if (playerOne.playerName.length() > playerTwo.playerName.length())
-				diff += playerOne.playerName.length();
-			else
-				diff += playerTwo.playerName.length();
-			
-			cout << "\n\n  Player Points:\n";
-			cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
-			cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
-
+		if (loopCondition == 'b')
 			break;
-
-		}
-		else if (option == 'y') {
-
-			resetTable();
+		else if (loopCondition == 'c')
 			continue;
-		
-		}
 
 		playerChoice = playerOne.selectChoice();
 
-		playerOne.getChart(playerChoice + '0');
+		playerOne.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
 		isWon = checkWin();
 
@@ -154,51 +67,20 @@ int main() {
 		
 		}
 
+		/* 2nd Player's Turn */
+
 		isOver = isGameOver();
 
-		if (isOver == true || isWon == true) {
+		loopCondition = checkContinue(isWon, isOver, option, playerOne, playerTwo);
 
-			isWon = false;
-			isOver = false;
-
-			do {
-
-				cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
-				cin >> option;
-				option = tolower(option);
-
-				if (option != 'y' && option != 'n')
-					cout << "> Please select a valid option.";
-
-			} while (option != 'y' && option != 'n');
-
-		}
-
-		if (option == 'n') {
-			
-			int diff = 5;
-
-			if (playerOne.playerName.length() > playerTwo.playerName.length())
-				diff += playerOne.playerName.length();
-			else
-				diff += playerTwo.playerName.length();
-
-			cout << "\n\n  Player Points:\n";
-			cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
-			cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
-			
-			break; 
-
-		} else if (option == 'y') {
-			
-			resetTable();
+		if (loopCondition == 'b')
+			break;
+		else if (loopCondition == 'c')
 			continue;
-		
-		}
 
 		playerChoice = playerTwo.selectChoice();
 
-		playerTwo.getChart(playerChoice + '0');
+		playerTwo.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
 		isWon = checkWin();
 
@@ -214,6 +96,8 @@ int main() {
 }
 
 bool checkWin() {
+
+	/* Checks through every possible combination in order to check if the user won */
 
 	bool isWon = false;
 	bool checkOver = false;
@@ -237,6 +121,8 @@ bool checkWin() {
 
 bool isGameOver() {
 
+	/* Checks if the game is over by checking if there isn't anything other than X's & O's */
+
 	bool isGameOver = false;
 	int j = 0;
 
@@ -256,6 +142,8 @@ bool isGameOver() {
 
 void resetTable() {
 
+	/* Resets table to it's original state if the user wants to play the game again */
+
 	places[0] = '1';
 	places[1] = '2';
 	places[2] = '3';
@@ -270,11 +158,65 @@ void resetTable() {
 
 string isFilled(int i) {
 
+	/* Highlights player symbols in different colors to avoid confusion */
+
 	if (places[i] == 'X')
 		return RED;
 	else if (places[i] == 'O')
 		return GREEN;
 	else
 		return RESET;
+
+}
+
+char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, Player &playerTwo) {
+
+	/* Asks if the user wants to play the game again */
+
+	char loopCondition;
+	
+	if (isOver == true || isWon == true) {
+
+		isWon = false;
+		isOver = false;
+
+		do {
+
+			cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
+			cin >> option;
+			option = tolower(option);
+
+			if (option != 'y' && option != 'n')
+				cout << "> Please select a valid option.";
+
+		} while (option != 'y' && option != 'n');
+
+	}
+
+	if (option == 'n') {
+
+		int diff = 5;
+
+		if (playerOne.playerName.length() > playerTwo.playerName.length())
+			diff += playerOne.playerName.length();
+		else
+			diff += playerTwo.playerName.length();
+
+		cout << "\n\n  Player Points:\n";
+		cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+		cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
+
+		loopCondition = 'b';
+		return loopCondition;
+
+	}
+	else if (option == 'y') {
+
+		resetTable();
+
+		loopCondition = 'c';
+		return loopCondition;
+	
+	}
 
 }

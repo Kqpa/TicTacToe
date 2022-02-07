@@ -3,7 +3,7 @@
 * @author Kqpa
 *
 * @date 4/2/2022
-* 
+*
 */
 
 #include <iostream>
@@ -27,13 +27,3 @@ using std::setw;
 #define RED     "\033[31m"		/* Red */
 
 #define GREEN   "\033[32m"		/* Green */
-
-char places[9] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-bool checkWin();
-
-bool isGameOver();
-
-void resetTable();
-
-string isFilled(int);
