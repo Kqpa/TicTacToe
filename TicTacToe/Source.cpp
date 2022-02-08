@@ -123,6 +123,8 @@ void Player::getChart(char place) {
 
 int Player::selectChoice() {
 
+	/* Ask user to select the place & ensure it's between 1 and 9 so it can't manupilate the 2nd user's choice */
+
 		int choice;
 
 		do {
