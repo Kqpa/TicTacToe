@@ -9,13 +9,13 @@ int main() {
 	bool isWon = false, isOver = false;
 	int playerChoice;
 
+	system("cls"); /* Use system("clear") for g++ */
+
 	cout << "\n\n      Tic-Tac-Toe\n\n";
 
 	do {
 
 		/* Initilize `Player` object data & make sure player names are different */
-
-		system("cls"); /* Use system("clear") for g++ */
 
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
 		getline(cin, playerOne.playerName);
