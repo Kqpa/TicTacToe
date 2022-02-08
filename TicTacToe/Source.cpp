@@ -15,6 +15,8 @@ int main() {
 
 		/* Initilize `Player` object data & make sure player names are different */
 
+		system("cls"); /* Use system("clear") for g++ */
+
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
 		getline(cin, playerOne.playerName);
 
@@ -92,6 +94,51 @@ int main() {
 		}
 
 	}
+
+}
+
+void Player::getChart(char place) {
+
+		for (int i = 0; i < 9; i++) {
+
+			if (places[i] == (int)place)
+				places[i] = this->playerSymbol;
+
+		}
+
+		system("cls"); /* Use system("clear") for g++ */
+
+		cout << "\n\n      Tic-Tac-Toe\n\n";
+		cout << "        |     |     " << endl;
+		cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
+		cout << "   _____|_____|_____" << endl;
+		cout << "        |     |     " << endl;
+		cout << "     " << isFilled(3) << places[3] << RESET << "  |" << "  " << isFilled(4) << places[4] << RESET << "  |" << "  " << isFilled(5) << places[5] << RESET << endl;
+		cout << "   _____|_____|_____" << endl;
+		cout << "        |     |     " << endl;
+		cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
+		cout << "        |     |     " << endl;
+
+}
+
+int Player::selectChoice() {
+
+		int choice;
+
+		do {
+
+			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a square (1-9): ";
+			cin >> choice;
+
+			if (choice < 1 || choice > 9) {
+
+				cout << "> Please select an option between 1-9.";
+
+			}
+
+		} while (choice < 1 || choice > 9);
+
+		return choice;
 
 }
 
