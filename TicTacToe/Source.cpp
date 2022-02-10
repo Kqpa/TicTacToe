@@ -18,14 +18,14 @@ int main() {
 		/* Initilize `Player` object data & make sure player names are different */
 
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
-		getline(cin, playerOne.playerName);
+		getline(cin >> ws, playerOne.playerName);
 
 		playerOne.playerSymbol = 'X';
 		playerOne.playerPoint = 0;
 		playerOne.playerColor = RED;
 
 		cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
-		getline(cin, playerTwo.playerName);
+		getline(cin >> ws, playerTwo.playerName);
 
 		playerTwo.playerSymbol = 'O';
 		playerTwo.playerPoint = 0;
@@ -252,8 +252,8 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 			diff += playerTwo.playerName.length();
 
 		cout << "\n\n  Player Points:\n";
-		cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
-		cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
+		cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << right << setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
+		cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << right << setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
 		loopCondition = 'b';
 		return loopCondition;

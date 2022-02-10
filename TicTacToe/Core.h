@@ -16,6 +16,10 @@ using std::cin;
 
 using std::cout;
 
+using std::ws;
+
+using std::right;
+
 using std::endl;
 
 using std::string;
