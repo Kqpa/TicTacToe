@@ -132,9 +132,11 @@ int Player::selectChoice() {
 			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a square (1-9): ";
 			cin >> choice;
 
-			if (choice < 1 || choice > 9) {
+			if ( (!(cin)) || (choice < 1) || (choice > 9) ) {
 
 				cout << "> Please select an option between 1-9.";
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 			}
 
