@@ -22,7 +22,7 @@ class Player {
 		
 		void getChart(char place);
 
-		int selectChoice();
+		int selectChoice(Player&, Player&);
 
 };
 

@@ -56,7 +56,7 @@ int main() {
 		else if (loopCondition == 'c')
 			continue;
 
-		playerChoice = playerOne.selectChoice();
+		playerChoice = playerOne.selectChoice(playerOne, playerTwo);
 
 		playerOne.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
@@ -80,7 +80,7 @@ int main() {
 		else if (loopCondition == 'c')
 			continue;
 
-		playerChoice = playerTwo.selectChoice();
+		playerChoice = playerTwo.selectChoice(playerOne, playerTwo);
 
 		playerTwo.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
@@ -94,6 +94,12 @@ int main() {
 		}
 
 	}
+
+	cout << endl << "> Press any key to exit. . .";
+	cin.ignore();
+	cin.get();
+
+	return 0;
 
 }
 
@@ -121,26 +127,31 @@ void Player::getChart(char place) {
 
 }
 
-int Player::selectChoice() {
+int Player::selectChoice(Player &playerOne, Player &playerTwo) {
 
-	/* Ask user to select the place & ensure it's between 1 and 9 so it can't manupilate the 2nd user's choice */
+	/* Ask user to select the place & ensure it's between 1 and 9 so it can't manupilate the 2nd user's choice & check if slot is already taken */
 
 		int choice;
 
 		do {
 
-			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a square (1-9): ";
+			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a slot (1-9): ";
 			cin >> choice;
 
 			if ( (!(cin)) || (choice < 1) || (choice > 9) ) {
 
-				cout << "> Please select an option between 1-9.";
+				cout << "> Please select a slot between 1-9.";
 				cin.clear();
 				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 			}
 
-		} while (choice < 1 || choice > 9);
+			if ((places[choice - 1]) == ('X'))
+				cout << "Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
+			else if ((places[choice - 1]) == ('O'))
+				cout << "Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
+
+		} while ((!(cin)) || (choice < 1) || (choice > 9) || (places[choice - 1]) == ('X') || (places[choice - 1]) == ('O'));
 
 		return choice;
 
@@ -237,8 +248,14 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 			cin >> option;
 			option = tolower(option);
 
-			if (option != 'y' && option != 'n')
+			if (option != 'y' && option != 'n') {
+
 				cout << "> Please select a valid option.";
+				cin.clear();
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+			}
+
 
 		} while (option != 'y' && option != 'n');
 
