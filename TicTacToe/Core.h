@@ -14,19 +14,15 @@
 
 #include <limits>
 
+#include <ios>
+
 using std::cin;
 
 using std::cout;
 
-using std::ws;
-
-using std::right;
-
 using std::endl;
 
 using std::string;
-
-using std::setw;
 
 #define RESET   "\033[0m"		/* Reset Color */
 
