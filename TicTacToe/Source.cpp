@@ -147,9 +147,9 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo) {
 			}
 
 			if ((places[choice - 1]) == ('X'))
-				cout << "Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
+				cout << "> Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
 			else if ((places[choice - 1]) == ('O'))
-				cout << "Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
+				cout << "> Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
 
 		} while ((!(cin)) || (choice < 1) || (choice > 9) || (places[choice - 1]) == ('X') || (places[choice - 1]) == ('O'));
 
