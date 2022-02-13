@@ -121,7 +121,7 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo) {
 			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a slot (1-9): ";
 			cin >> choice;
 
-			if ( (!(cin)) || (choice < 1) || (choice > 9) ) {
+			if ((!(cin)) || (choice < 1) || (choice > 9)) {
 
 				cout << "> Please select a slot between 1-9.";
 				cin.clear();
