@@ -3,7 +3,8 @@
 
 int main() {
 
-	Player playerOne, playerTwo;
+	Player playerOne = Player(0, 'X', RED);
+	Player playerTwo = Player(0, 'O', GREEN);
 	
 	char option = '0', loopCondition;
 	bool isWon = false, isOver = false;
@@ -20,16 +21,8 @@ int main() {
 		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
 		getline(cin >> std::ws, playerOne.playerName);
 
-		playerOne.playerSymbol = 'X';
-		playerOne.playerPoint = 0;
-		playerOne.playerColor = RED;
-
 		cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
 		getline(cin >> std::ws, playerTwo.playerName);
-
-		playerTwo.playerSymbol = 'O';
-		playerTwo.playerPoint = 0;
-		playerTwo.playerColor = GREEN;
 
 		if (playerOne.playerName == playerTwo.playerName)
 			cout << "> Player names have to be different." << endl;
@@ -62,12 +55,7 @@ int main() {
 
 		isWon = checkWin();
 
-		if (isWon == true) {
-			
-			cout << endl << "> " << playerOne.playerColor << playerOne.playerName << RESET << " won!" << endl;
-			playerOne.playerPoint++;
-		
-		}
+		playerOne.winMessage(isWon);
 
 		/* 2nd Player's Turn */
 
@@ -86,12 +74,7 @@ int main() {
 
 		isWon = checkWin();
 
-		if (isWon == true) {
-			
-			cout << endl << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << " won!" << endl;
-			playerTwo.playerPoint++;
-
-		}
+		playerTwo.winMessage(isWon);
 
 	}
 
@@ -157,6 +140,25 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo) {
 
 }
 
+void Player::winMessage(bool& isWon) {
+	
+	if (isWon == true) {
+
+		cout << endl << "> " << this->playerColor << this->playerName << RESET << " won!" << endl;
+		this->playerPoint++;
+
+	}
+
+}
+
+Player::Player(int point, char symbol, string color) {
+
+	playerPoint = point;
+	playerSymbol = symbol;
+	playerColor = color;
+
+}
+
 bool checkWin() {
 
 	/* Checks through every possible combination in order to check if the user won */
@@ -179,6 +181,7 @@ bool checkWin() {
 			isWon = true;
 			
 	return isWon;
+
 }
 
 bool isGameOver() {
@@ -206,15 +209,11 @@ void resetTable() {
 
 	/* Resets table to it's original state if the user wants to play the game again */
 
-	places[0] = '1';
-	places[1] = '2';
-	places[2] = '3';
-	places[3] = '4';
-	places[4] = '5';
-	places[5] = '6';
-	places[6] = '7';
-	places[7] = '8';
-	places[8] = '9';
+	for (int i = 0; i < 9; i++) {
+
+		places[i] = i + 1 + '0';
+
+	}
 
 }
 

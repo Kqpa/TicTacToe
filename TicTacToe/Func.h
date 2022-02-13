@@ -24,6 +24,10 @@ class Player {
 
 		int selectChoice(Player&, Player&);
 
+		void winMessage(bool&);
+
+		Player(int, char, string);
+
 };
 
 bool checkWin();
