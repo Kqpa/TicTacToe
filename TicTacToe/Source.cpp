@@ -273,7 +273,7 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 		else
 			diff += playerTwo.playerName.length();
 
-		cout << "\n\n  Player Points:\n";
+		cout << "\n  Player Points:\n";
 		cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << std::setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
 		cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << std::setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
