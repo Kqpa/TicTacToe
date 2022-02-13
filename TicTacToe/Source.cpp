@@ -88,6 +88,8 @@ int main() {
 
 void Player::getChart(char place) {
 
+	/* Prints the current state of the chart & places player choice */
+
 		for (int i = 0; i < 9; i++) {
 
 			if (places[i] == (int)place)
@@ -141,6 +143,8 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo) {
 }
 
 void Player::winMessage(bool& isWon) {
+
+	/* Prints a win message if the game is won */
 	
 	if (isWon == true) {
 
