@@ -23,5 +23,5 @@ It's possible to build this program by using Visual Studio. Open the [`.sln`](ht
 ```sh
 git clone https://github.com/Kqpa/TicTacToe
 cd ./TicTacToe/TicTacToe/
-g++ Source.cpp -o TicTacToe && ./TicTacToe.exe # Compiles & Executes TicTacToe
+g++ Source.cpp -o TicTacToe && ./TicTacToe # Compiles & Executes TicTacToe
 ```
