@@ -28,7 +28,7 @@ git clone https://github.com/Kqpa/TicTacToe
 cd ./TicTacToe/TicTacToe/
 
 # G++ uses system("clear") instead of system("cls")
-sed 's/system("cls")/system("clear")/g' Source.cpp
+sed -i 's/system("cls")/system("clear")/g' Source.cpp
 
 g++ Source.cpp -o TicTacToe && ./TicTacToe
  ```
