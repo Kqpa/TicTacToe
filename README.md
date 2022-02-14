@@ -24,7 +24,11 @@ If you don't have Visual Studio installed, you can build the program using [`g++
 
 ```sh
 git clone https://github.com/Kqpa/TicTacToe
+
 cd ./TicTacToe/TicTacToe/
-sed 's/system("cls")/system("clear")/g' Source.cpp # g++ uses system("clear") instead of system("cls")
+
+# G++ uses system("clear") instead of system("cls")
+sed 's/system("cls")/system("clear")/g' Source.cpp
+
 g++ Source.cpp -o TicTacToe && ./TicTacToe
  ```
