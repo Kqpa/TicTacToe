@@ -6,29 +6,68 @@ int main() {
 	Player playerOne = Player(0, 'X', RED);
 	Player playerTwo = Player(0, 'O', GREEN);
 	
-	char option = '0', loopCondition;
+	char option = '0', loopCondition, gameMode;
 	bool isWon = false, isOver = false;
 	int playerChoice;
 
-	system("cls"); /* Use system("clear") for g++ */
+	printTicTacToe();
 
-	cout << "\n\n      Tic-Tac-Toe\n\n";
+	cout << "To play with a " << GREEN << "bot" << RESET << ", type " << GREEN << "1" << RESET << "." << endl;
+	cout << "To play with " << RED << "someone else" << RESET << ", type " << RED << "2" << RESET << "." << endl;
 
 	do {
 
-		/* Initilize `Player` object data & make sure player names are different */
+		cout << endl << "> [" << GREEN << "1" << RESET << "/" << RED << "2" << RESET << "]: ";
+		cin >> gameMode;
+		gameMode = tolower(gameMode);
 
-		cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
-		getline(cin >> std::ws, playerOne.playerName);
+		if (gameMode != '1' && gameMode != '2') {
 
-		cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
-		getline(cin >> std::ws, playerTwo.playerName);
+			cout << "> Please select a valid option.";
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		if (playerOne.playerName == playerTwo.playerName)
-			cout << "> Player names have to be different." << endl;
+		}
 
-	} while (playerOne.playerName == playerTwo.playerName);
+	} while (gameMode != '1' && gameMode != '2');
 
+	printTicTacToe();
+
+	if (gameMode == '2') {
+
+		do {
+
+			/* Initilize `Player` object data & make sure player names are different */
+
+			cout << "> " << RED << "Player 1" << RESET << ", enter your name: ";
+			getline(cin >> std::ws, playerOne.playerName);
+
+			cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
+			getline(cin >> std::ws, playerTwo.playerName);
+
+			if (playerOne.playerName == playerTwo.playerName)
+				cout << "> Player names have to be different." << endl;
+
+		} while (playerOne.playerName == playerTwo.playerName);
+
+	} else if (gameMode == '1') {
+
+		playerTwo.playerName = "[BOT]";
+
+		do {
+
+			/* Initilize `Player` object data & make sure player names are different */
+
+			cout << "> " << RED << "Player" << RESET << ", enter your name: ";
+			getline(cin >> std::ws, playerOne.playerName);
+
+			if (playerOne.playerName == "[BOT]")
+				cout << "> Player name cannot be '[BOT]'." << endl;
+
+		} while (playerOne.playerName == "[BOT]");
+
+	}
+	
 	while (true) {
 
 		if ((option == '0') || (option == 'y')) {
@@ -49,7 +88,7 @@ int main() {
 		else if (loopCondition == 'c')
 			continue;
 
-		playerChoice = playerOne.selectChoice(playerOne, playerTwo);
+		playerChoice = playerOne.selectChoice(playerOne, playerTwo, gameMode);
 
 		playerOne.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
@@ -68,7 +107,7 @@ int main() {
 		else if (loopCondition == 'c')
 			continue;
 
-		playerChoice = playerTwo.selectChoice(playerOne, playerTwo);
+		playerChoice = playerTwo.selectChoice(playerOne, playerTwo, gameMode);
 
 		playerTwo.getChart(playerChoice + '0'); /* The plus '0' casts `int` into `char` by changing the ASCII value */
 
@@ -97,9 +136,8 @@ void Player::getChart(char place) {
 
 		}
 
-		system("cls"); /* Use system("clear") for g++ */
+		printTicTacToe();
 
-		cout << "\n\n      Tic-Tac-Toe\n\n";
 		cout << "        |     |     " << endl;
 		cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
 		cout << "   _____|_____|_____" << endl;
@@ -112,35 +150,61 @@ void Player::getChart(char place) {
 
 }
 
-int Player::selectChoice(Player &playerOne, Player &playerTwo) {
+int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 
 	/* Ask user to select the place & ensure it's between 1 and 9 so it can't manupilate the 2nd user's choice & check if slot is already taken */
 
 		int choice;
 
-		do {
+		if (gameMode == 'h') { /* if game mode human */
+	
+			do {
 
-			cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a slot (1-9): ";
-			cin >> choice;
+				cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a slot (1-9): ";
+				cin >> choice;
 
-			if ((!(cin)) || (choice < 1) || (choice > 9)) {
+				if ((!(cin)) || (choice < 1) || (choice > 9)) {
 
-				cout << "> Please select a slot between 1-9.";
-				cin.clear();
-				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "> Please select a slot between 1-9.";
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-			}
+				}
 
-			if ((places[choice - 1]) == ('X'))
-				cout << "> Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
-			else if ((places[choice - 1]) == ('O'))
-				cout << "> Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
+				if ((places[choice - 1]) == ('X'))
+					cout << "> Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
+				else if ((places[choice - 1]) == ('O'))
+					cout << "> Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
 
-		} while ((!(cin)) || (choice < 1) || (choice > 9) || (places[choice - 1]) == ('X') || (places[choice - 1]) == ('O'));
+			} while ((!(cin)) || (choice < 1) || (choice > 9) || (places[choice - 1]) == ('X') || (places[choice - 1]) == ('O'));
 
+		} else if ((gameMode == '1') && (this->playerName == "[BOT]")) { /* if game mode bot */
+
+			srand (time(NULL));
+				
+				int randIndex = rand() % 4;
+				
+				for (int i = 0; i < 9; i++)
+				{
+					
+					int randIndex = rand() % 4;
+
+					if ((places[randIndex] == 'X') || (places[randIndex] == 'O'))
+					{
+						continue;
+					}
+					else
+					{
+						break;
+					}
+					
+				}
+		}
+		
 		return choice;
 
 }
+
 
 void Player::winMessage(bool& isWon) {
 
@@ -247,7 +311,7 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 
 		do {
 
-			cout << "\n> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
+			cout << endl << "> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
 			cin >> option;
 			option = tolower(option);
 
@@ -258,7 +322,6 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 			}
-
 
 		} while (option != 'y' && option != 'n');
 
@@ -273,7 +336,7 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 		else
 			diff += playerTwo.playerName.length();
 
-		cout << "\n  Player Points:\n";
+		cout << endl << "  Player Points:" << endl;
 		cout << "> " << playerOne.playerColor << playerOne.playerName << RESET << ": " << std::right << std::setw(diff - playerOne.playerName.length()) << playerOne.playerPoint << endl;
 		cout << "> " << playerTwo.playerColor << playerTwo.playerName << RESET << ": " << std::right << std::setw(diff - playerTwo.playerName.length()) << playerTwo.playerPoint << endl;
 
@@ -289,5 +352,13 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 		return loopCondition;
 	
 	}
+
+}
+
+void printTicTacToe() {
+	
+	system("clear"); /* Use system("clear") for g++ */
+
+	cout << endl << endl << "      Tic-Tac-Toe" << endl << endl;
 
 }
