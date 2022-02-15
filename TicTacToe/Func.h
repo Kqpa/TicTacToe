@@ -22,7 +22,7 @@ class Player {
 		
 		void getChart(char place);
 
-		int selectChoice(Player&, Player&);
+		int selectChoice(Player&, Player&, char&);
 
 		void winMessage(bool&);
 
@@ -39,3 +39,5 @@ void resetTable();
 string isFilled(int);
 
 char checkContinue(bool&, bool&, char&, Player&, Player&);
+
+void printTitle();
