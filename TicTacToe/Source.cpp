@@ -186,16 +186,21 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 
 			srand(time(NULL));
 								
-				while (true)
-				{
-					
+				while (true) {
+
 					randIndex = rand() % 9;
 
-					if ((places[randIndex] == 'X') || (places[randIndex] == 'O'))
-						continue;
-					else
-						choice = randIndex + 1;
+					if ((places[randIndex] == 'X') || (places[randIndex] == 'O')) {
 						
+						continue;
+
+					} else {
+						
+						choice = randIndex + 1;
+						break;
+
+					}
+
 				}
 		
 		}
@@ -310,7 +315,7 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 
 		do {
 
-			cout << endl << "> Game over, play again? (" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "): ";
+			cout << endl << "> Game over, play again? [" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "]: ";
 			cin >> option;
 			option = tolower(option);
 
