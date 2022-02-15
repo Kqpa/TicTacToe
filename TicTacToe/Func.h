@@ -40,4 +40,4 @@ string isFilled(int);
 
 char checkContinue(bool&, bool&, char&, Player&, Player&);
 
-void printTicTacToe();
+void printTitle();
