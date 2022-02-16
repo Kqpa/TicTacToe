@@ -21,15 +21,12 @@ int main() {
 
 		cout << endl << "> [" << GREEN << "1" << RESET << "/" << RED << "2" << RESET << "]: ";
 		cin >> gameMode;
-		gameMode = tolower(gameMode);
+	
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-		if (gameMode != '1' && gameMode != '2') {
-
+		if (gameMode != '1' && gameMode != '2')
 			cout << "> Please select a valid option.";
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-		}
 
 	} while (gameMode != '1' && gameMode != '2');
 
@@ -164,14 +161,13 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 
 				cout << endl << "> " << this->playerColor << this->playerName << RESET << ", pick a slot (1-9): ";
 				cin >> choice;
+				
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-				if ((!(cin)) || (choice < 1) || (choice > 9)) {
 
+				if ((!(cin)) || (choice < 1) || (choice > 9))
 					cout << "> Please select a slot between 1-9.";
-					cin.clear();
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-				}
 
 				if ((places[choice - 1]) == ('X'))
 					cout << "> Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
@@ -317,15 +313,13 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 
 			cout << endl << "> Game over, play again? [" << GREEN << "y" << RESET << "/" << RED << "n" << RESET << "]: ";
 			cin >> option;
+			
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			option = tolower(option);
 
-			if (option != 'y' && option != 'n') {
-
+			if (option != 'y' && option != 'n')
 				cout << "> Please select a valid option.";
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-			}
 
 		} while (option != 'y' && option != 'n');
 
