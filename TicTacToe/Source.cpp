@@ -78,8 +78,6 @@ int main() {
 
 		/* 1st Player's Turn */
 
-		isOver = isGameOver();
-
 		loopCondition = checkContinue(isWon, isOver, option, playerOne, playerTwo);
 
 		if (loopCondition == 'b')
@@ -93,11 +91,11 @@ int main() {
 
 		isWon = checkWin();
 
-		playerOne.winMessage(isWon);
+		isOver = isGameOver();
+
+		playerOne.winMessage(isWon, isOver);
 
 		/* 2nd Player's Turn */
-
-		isOver = isGameOver();
 
 		loopCondition = checkContinue(isWon, isOver, option, playerOne, playerTwo);
 
@@ -112,12 +110,13 @@ int main() {
 
 		isWon = checkWin();
 
-		playerTwo.winMessage(isWon);
+		isOver = isGameOver();
+
+		playerTwo.winMessage(isWon, isOver);
 
 	}
 
 	cout << endl << "> Press any key to exit. . .";
-	cin.ignore();
 	cin.get();
 
 	return 0;
@@ -206,7 +205,7 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 }
 
 
-void Player::winMessage(bool& isWon) {
+void Player::winMessage(bool& isWon, bool& isOver) {
 
 	/* Prints a win message if the game is won */
 	
@@ -216,6 +215,8 @@ void Player::winMessage(bool& isWon) {
 		this->playerPoint++;
 
 	}
+	else if (isOver == true && isWon == false)
+		cout << endl << "> It's a tie!" << endl;
 
 }
 
