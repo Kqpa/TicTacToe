@@ -93,7 +93,7 @@ int main() {
 
 		isOver = isGameOver();
 
-		playerOne.winMessage(isWon, isOver);
+		playerOne.endMessage(isWon, isOver);
 
 		/* 2nd Player's Turn */
 
@@ -112,11 +112,11 @@ int main() {
 
 		isOver = isGameOver();
 
-		playerTwo.winMessage(isWon, isOver);
+		playerTwo.endMessage(isWon, isOver);
 
 	}
 
-	cout << endl << "> Press any key to exit. . .";
+	cout << endl << "> Hit enter to exit. . .";
 	cin.get();
 
 	return 0;
@@ -205,9 +205,9 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 }
 
 
-void Player::winMessage(bool& isWon, bool& isOver) {
+void Player::endMessage(bool& isWon, bool& isOver) {
 
-	/* Prints a win message if the game is won */
+	/* Prints a win message if the game is won, or if it's a tie */
 	
 	if (isWon == true) {
 
@@ -221,6 +221,8 @@ void Player::winMessage(bool& isWon, bool& isOver) {
 }
 
 Player::Player(int point, char symbol, string color) {
+
+	/* Constructor for the `Player` object */
 
 	playerPoint = point;
 	playerSymbol = symbol;

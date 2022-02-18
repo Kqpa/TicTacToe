@@ -24,7 +24,7 @@ class Player {
 
 		int selectChoice(Player&, Player&, char&);
 
-		void winMessage(bool&, bool&);
+		void endMessage(bool&, bool&);
 
 		Player(int, char, string);
 
