@@ -1,5 +1,5 @@
-#include "Core.h"
-#include "Func.h"
+#include "Core.hpp"
+#include "Func.hpp"
 
 int main() {
 
