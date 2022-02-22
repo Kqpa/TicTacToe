@@ -71,7 +71,7 @@ int main() {
 
 		if ((option == '0') || (option == 'y')) {
 
-			playerOne.getChart(NULL);
+			playerOne.getChart('Q'); /* 'Q' is passed as an argument, this skips the placing part & just prints out the table */
 			option = '1'; /* Sets the value of `option` to something other than 'y' and '0' so it doesnt meet the condition again */
 
 		}
@@ -127,6 +127,8 @@ void Player::getChart(char place) {
 
 	/* Prints the current state of the chart & places player choice */
 
+	if (place != 'Q') {		
+		
 		for (int i = 0; i < 9; i++) {
 
 			if (places[i] == (int)place)
@@ -134,17 +136,19 @@ void Player::getChart(char place) {
 
 		}
 
-		printTitle();
+	}
 
-		cout << "        |     |     " << endl;
-		cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
-		cout << "   _____|_____|_____" << endl;
-		cout << "        |     |     " << endl;
-		cout << "     " << isFilled(3) << places[3] << RESET << "  |" << "  " << isFilled(4) << places[4] << RESET << "  |" << "  " << isFilled(5) << places[5] << RESET << endl;
-		cout << "   _____|_____|_____" << endl;
-		cout << "        |     |     " << endl;
-		cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
-		cout << "        |     |     " << endl;
+	printTitle();
+
+	cout << "        |     |     " << endl;
+	cout << "     " << isFilled(0) << places[0] << RESET << "  |" << "  " << isFilled(1) << places[1] << RESET << "  |" << "  " << isFilled(2) << places[2] << RESET << endl;
+	cout << "   _____|_____|_____" << endl;
+	cout << "        |     |     " << endl;
+	cout << "     " << isFilled(3) << places[3] << RESET << "  |" << "  " << isFilled(4) << places[4] << RESET << "  |" << "  " << isFilled(5) << places[5] << RESET << endl;
+	cout << "   _____|_____|_____" << endl;
+	cout << "        |     |     " << endl;
+	cout << "     " << isFilled(6) << places[6] << RESET << "  |" << "  " << isFilled(7) << places[7] << RESET << "  |" << "  " << isFilled(8) << places[8] << RESET << endl;
+	cout << "        |     |     " << endl;
 
 }
 
