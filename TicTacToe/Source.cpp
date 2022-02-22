@@ -243,18 +243,17 @@ bool checkWin() {
 	/* Checks through every possible combination in order to check if the user won */
 
 	bool isWon = false;
-	bool checkOver = false;
 
 	if (
 
-		(places[0] == places[1]) && (places[1] == places[2]) ||
-		(places[3] == places[4]) && (places[4] == places[5]) ||
-		(places[6] == places[7]) && (places[7] == places[8]) ||
-		(places[0] == places[3]) && (places[3] == places[6]) ||
-		(places[1] == places[4]) && (places[4] == places[7]) ||
-		(places[2] == places[5]) && (places[5] == places[8]) ||
-		(places[0] == places[4]) && (places[4] == places[8]) ||
-		(places[2] == places[4]) && (places[4] == places[6])
+		((places[0] == places[1]) && (places[1] == places[2])) ||
+		((places[3] == places[4]) && (places[4] == places[5])) ||
+		((places[6] == places[7]) && (places[7] == places[8])) ||
+		((places[0] == places[3]) && (places[3] == places[6])) ||
+		((places[1] == places[4]) && (places[4] == places[7])) ||
+		((places[2] == places[5]) && (places[5] == places[8])) ||
+		((places[0] == places[4]) && (places[4] == places[8])) ||
+		((places[2] == places[4]) && (places[4] == places[6]))
 
 		)
 			isWon = true;
