@@ -6,6 +6,9 @@
 *
 */
 
+#ifndef TICTACTOE_CORE_H
+#define TICTACTOE_CORE_H
+
 #include <iostream>
 
 #include <ios>
@@ -45,3 +48,5 @@ using std::system;
 #define RED     "\033[31m"	/* Red */
 
 #define GREEN   "\033[32m"	/* Green */
+
+#endif /* TICTACTOE_CORE_H */

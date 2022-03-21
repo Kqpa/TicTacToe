@@ -6,6 +6,9 @@
 *
 */
 
+#ifndef TICTACTOE_FUNC_H
+#define TICTACTOE_FUNC_H
+
 #include "Core.hpp"
 
 char places[9] = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -41,3 +44,5 @@ string isFilled(int);
 char checkContinue(bool&, bool&, char&, Player&, Player&);
 
 void printTitle();
+
+#endif /* TICTACTOE_FUNC_H */

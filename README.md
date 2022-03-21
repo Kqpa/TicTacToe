@@ -30,7 +30,7 @@ cd ./TicTacToe/TicTacToe/
 g++ Source.cpp -o TicTacToe && ./TicTacToe
 ```
  
-If you see something like [this](https://cdn.discordapp.com/attachments/711225037738213446/944892974012198932/unknown.png) when you launch the program, that means that your terminal doesn't ANSI escape codes. Replace the color macros in [`Core.hpp`](/TicTacToe/Core.hpp) with the code block below: 
+If you see something like [this](https://cdn.discordapp.com/attachments/711225037738213446/944892974012198932/unknown.png) when you launch the program, that means that your terminal doesn't support ANSI escape codes. Replace the color macros in [`Core.hpp`](/TicTacToe/Core.hpp) with the code block below: 
 
 ```cpp
 #define RESET   ""  /* "\033[0m"  */	/* Reset Color */
