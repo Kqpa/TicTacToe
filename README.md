@@ -27,16 +27,10 @@ git clone https://github.com/Kqpa/TicTacToe
 
 cd ./TicTacToe/TicTacToe/
 
-# GNU implementation of sed — use this if you're on GNU/Linux
-sed -i 's/system("cls")/system("clear")/g' Source.cpp
-
-# BSD implementation of sed — use this if you're on macOS or BSD
-sed -i '' -e 's/system("cls")/system("clear")/g' Source.cpp
-
 g++ Source.cpp -o TicTacToe && ./TicTacToe
 ```
  
-If you see something like [this](https://cdn.discordapp.com/attachments/711225037738213446/944892974012198932/unknown.png) when you launch the program, that means that your terminal doesn't support colors. Replace the color macros in [`Core.hpp`](/TicTacToe/Core.hpp) with the code block below: 
+If you see something like [this](https://cdn.discordapp.com/attachments/711225037738213446/944892974012198932/unknown.png) when you launch the program, that means that your terminal doesn't ANSI escape codes. Replace the color macros in [`Core.hpp`](/TicTacToe/Core.hpp) with the code block below: 
 
 ```cpp
 #define RESET   ""  /* "\033[0m"  */	/* Reset Color */

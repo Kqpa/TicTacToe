@@ -38,6 +38,8 @@ using std::numeric_limits;
 
 using std::streamsize;
 
+using std::system;
+
 #define RESET   "\033[0m"	/* Reset Color */
 
 #define RED     "\033[31m"	/* Red */

@@ -1,7 +1,7 @@
 #include "Core.hpp"
 #include "Func.hpp"
 
-int main() {
+int main(void) {
 
 	Player playerOne = Player(0, 'X', RED);
 	Player playerTwo = Player(0, 'O', GREEN);
@@ -25,10 +25,15 @@ int main() {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-		if (gameMode != '1' && gameMode != '2')
+		if (gameMode != '1' && gameMode != '2') {
+			
 			cout << "> Please select a valid option.";
+			continue;
 
-	} while (gameMode != '1' && gameMode != '2');
+		} else
+			break;
+
+	} while (true);
 
 	printTitle();
 
@@ -44,10 +49,15 @@ int main() {
 			cout << "> " << GREEN << "Player 2" << RESET << ", enter your name: ";
 			getline(cin >> ws, playerTwo.playerName);
 
-			if (playerOne.playerName == playerTwo.playerName)
-				cout << "> Player names have to be different." << endl;
+			if (playerOne.playerName == playerTwo.playerName) {
 
-		} while (playerOne.playerName == playerTwo.playerName);
+				cout << "> Player names have to be different." << endl;
+				continue;
+
+			} else
+				break;
+
+		} while (true);
 
 	} else if (gameMode == '1') {
 
@@ -60,10 +70,15 @@ int main() {
 			cout << "> " << RED << "Player" << RESET << ", enter your name: ";
 			getline(cin >> ws, playerOne.playerName);
 
-			if (playerOne.playerName == "[BOT]")
-				cout << "> Player name cannot be '[BOT]'." << endl;
+			if (playerOne.playerName == "[BOT]") {
 
-		} while (playerOne.playerName == "[BOT]");
+				cout << "> Player name cannot be '[BOT]'." << endl;
+				continue;
+
+			} else
+				break;
+
+		} while (true);
 
 	}
 	
@@ -176,12 +191,21 @@ int Player::selectChoice(Player &playerOne, Player &playerTwo, char &gameMode) {
 				
 				}
 
-				if ((places[choice - 1]) == ('X'))
+				if ((places[choice - 1]) == ('X')) {
+					
 					cout << "> Slot " << playerOne.playerColor << choice << RESET << " is already taken by " << playerOne.playerColor << playerOne.playerName << RESET << ".";
-				else if ((places[choice - 1]) == ('O'))
-					cout << "> Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
+					continue;
 
-			} while ((!(cin)) || (choice < 1) || (choice > 9) || (places[choice - 1]) == ('X') || (places[choice - 1]) == ('O'));
+				}
+				else if ((places[choice - 1]) == ('O')) {
+				
+					cout << "> Slot " << playerTwo.playerColor << choice << RESET << " is already taken by " << playerTwo.playerColor << playerTwo.playerName << RESET << ".";
+					continue;
+
+				} else
+					break;
+
+			} while (true);
 
 		} else if ((gameMode == '1') && (this->playerName == "[BOT]")) {
 
@@ -328,10 +352,16 @@ char checkContinue(bool &isWon, bool &isOver, char &option, Player &playerOne, P
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			option = tolower(option);
 
-			if (option != 'y' && option != 'n')
-				cout << "> Please select a valid option.";
+			if (option != 'y' && option != 'n') {
 
-		} while (option != 'y' && option != 'n');
+				cout << "> Please select a valid option.";
+				continue;
+
+			} else
+				break;
+
+
+		} while (true);
 
 	}
 
@@ -366,7 +396,11 @@ void printTitle() {
 
 	/* Prints the title for the game */
 	
-	system("cls"); /* Use system("clear") for g++ */
+	#ifdef _WIN32
+	    system("cls"); /* Windows uses `cls` to clear the console */
+	#else
+		system("clear"); /* *NIX uses `clear` to clear the console */
+	#endif
 
 	cout << endl << endl << "      Tic-Tac-Toe" << endl << endl;
 
