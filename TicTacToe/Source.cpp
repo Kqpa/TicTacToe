@@ -397,7 +397,7 @@ void printTitle() {
 	/* Prints the title for the game */
 	
 	#ifdef _WIN32
-	    system("cls"); /* Windows uses `cls` to clear the console */
+		system("cls"); /* Windows uses `cls` to clear the console */
 	#else
 		system("clear"); /* *NIX uses `clear` to clear the console */
 	#endif
